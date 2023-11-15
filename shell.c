@@ -9,7 +9,7 @@ int main(void)
 
 	while (1)
 	{
-		shell_print("#Cisfun$");
+		shell_print("#Cisfun$ ");
 		read_command(format, sizeof(format));
 		execute(format);
 	}
