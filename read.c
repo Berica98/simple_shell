@@ -12,7 +12,6 @@ void read_command(char *format, size_t n)
 	read = getline(&format, &n, stdin);
 	if (read == -1)
 	{
-		perror("getline");
 		exit(EXIT_FAILURE);
 	}
 		else if (read == 0)
