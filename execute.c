@@ -6,7 +6,7 @@
  */
 void execute(char *format)
 {
-	/*int status;*/
+	int status;
 	pid_t pid = fork();
 	char *args[] = {"ls", NULL};
 
@@ -24,6 +24,6 @@ void execute(char *format)
 	}
 	else
 	{
-		wait(NULL);
+		wait(&status);
 	}
 }
