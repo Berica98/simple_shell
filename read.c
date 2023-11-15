@@ -7,18 +7,21 @@
  */
 void read_command(char *format, size_t n)
 {
-	if (fgets(format, n, stdin) == NULL)
+	ssize_t read;
+
+	read = getline(&format, &n, stdin);
+	if (read == -1)
 	{
-		if (feof(stdin))
+		perror("getline");
+		exit(EXIT_FAILURE);
+	}
+		else if (read == 0)
 		{
 			shell_print("\n");
 			exit(EXIT_SUCCESS);
 		}
-		else
-		{
-			shell_print("Error while reading file\n");
-			exit(EXIT_FAILURE);
-		}
+	else
+	{
+		format[strcspn(format, "\n")] = '\0';
 	}
-	format[strcspn(format, "\n")] = '\0';
 }
