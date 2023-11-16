@@ -12,12 +12,14 @@ int main(void)
 
 	char *format = NULL;
 	int i = 0;
+	bool end = false;
 	char *delim = " ";
 	char *token;
 	size_t size = 0;
 
 	while (1)
 	{
+		shell_print("#cisfun$");
 		read = getline(&format, &size, stdin);
 		if (read == -1)
 		{
@@ -35,7 +37,15 @@ int main(void)
 		while (token)
 		{
 			args[i++] = token;
-			token = (NULL, delim);
+			token = strtok(NULL, delim);
+			if (!token)
+			{
+				end = true;
+			}
+		}
+		if (!end)
+		{
+			continue;
 		}
 		args[i] = NULL;
 		pid = fork();
@@ -43,16 +53,12 @@ int main(void)
 		if (pid == 0)
 		{
 			execve(args[0], args, NULL);
-			perror("execv");
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 		else if (pid > 0)
 		{
 			wait(&status);
-			if (status != 0)
-			{
-				shell_print("Error executing command\n");
-			}
 		}
 		else
 		{

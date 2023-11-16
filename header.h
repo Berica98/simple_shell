@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <stdbool.h>
 
 void shell_print(const char *format);
 #endif
