@@ -8,6 +8,10 @@
 void read_command(char *format, size_t n)
 {
 	ssize_t read;
+	char *token;
+	char *args[10];
+
+	int count = 0;
 
 	read = getline(&format, &n, stdin);
 	if (read == -1)
@@ -24,4 +28,16 @@ void read_command(char *format, size_t n)
 		}
 	}
 	format[strcspn(format, "\n")] = '\0';
+
+	/*tokenizing the input command*/
+	token = strtok(format, " ");
+	while (token != NULL && count < 10 - 1)
+	{
+		args[count] = token;
+		count++;
+		token = strtok(NULL, " ");
+	}
+	args[count] = NULL;
+
+	execve(args[0], args, NULL);
 }

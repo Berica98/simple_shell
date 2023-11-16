@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
-void execute(char *format);
+/*void execute(char *format);*/
 void shell_print(const char *format);
 void read_command(char *format, size_t n);
 

@@ -11,7 +11,7 @@ int main(void)
 	{
 		shell_print("#Cisfun$ ");
 		read_command(format, sizeof(format));
-		execute(format);
+		/*execute(format);*/
 	}
 	return (0);
 }
