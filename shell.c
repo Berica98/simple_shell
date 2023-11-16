@@ -19,7 +19,7 @@ int main(void)
 
 	while (1)
 	{
-		shell_print("#cisfun$");
+		shell_print("#cisfun$ ");
 		read = getline(&format, &size, stdin);
 		if (read == -1)
 		{
@@ -58,7 +58,7 @@ int main(void)
 		}
 		else if (pid > 0)
 		{
-			wait(&status);
+			waitpid(pid, &status, 0);
 		}
 		else
 		{
