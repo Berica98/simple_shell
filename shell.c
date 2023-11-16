@@ -53,7 +53,7 @@ int main(void)
 		if (pid == 0)
 		{
 			execve(args[0], args, NULL);
-			perror("execve");
+			perror("./shell");
 			exit(EXIT_FAILURE);
 		}
 		else if (pid > 0)
@@ -65,6 +65,7 @@ int main(void)
 			perror("fork");
 			exit(EXIT_FAILURE);
 		}
+		free(format);
 	}
 	return (0);
 }
