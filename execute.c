@@ -6,10 +6,12 @@
  */
 void execute(char *format)
 {
-	int status;
-	pid_t pid = fork();
-	char *args[] = {"ls", NULL};
+	char *args[2];/*= malloc(sizeof(char *) * 2);*/
 
+	pid_t pid = fork();
+	args[0] = format;
+	args[1] = NULL;
+	
 	if (pid == 0)
 	{
 		/*args[0] = format;*/
@@ -17,10 +19,9 @@ void execute(char *format)
 		perror("./shell");
 		exit(EXIT_FAILURE);
 	}
-	else if (pid > 0)
-	{
-		wait(&status);
-	}
 	else
-	perror("Error:");
+	{
+		wait(NULL);
+	}
+	/*free(format);*/
 }

@@ -12,15 +12,16 @@ void read_command(char *format, size_t n)
 	read = getline(&format, &n, stdin);
 	if (read == -1)
 	{
-		exit(EXIT_FAILURE);
-	}
-		else if (read == 0)
+		if (feof(stdin))
 		{
 			shell_print("\n");
 			exit(EXIT_SUCCESS);
 		}
-	else
-	{
-		format[strcspn(format, "\n")] = '\0';
+		else
+		{
+			shell_print("Error while reading input\n");
+			exit(EXIT_FAILURE);
+		}
 	}
+	format[strcspn(format, "\n")] = '\0';
 }
