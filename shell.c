@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 
 	while (true)
 	{
-		shell_print("#cisfun$ ");
 		format = get();
 		if (format == NULL)
 		{

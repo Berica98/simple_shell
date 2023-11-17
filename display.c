@@ -17,8 +17,10 @@ char *get(void)
 	read = getline(&format, &n, stdin);
 	if (read == -1)
 	{
-		free(format);
-		exit(-1);
+		if (feof(stdin))
+		{
+			return (NULL);
+		}
 	}
 	/* removing thr new line character*/
 	cal = strlen(format);
