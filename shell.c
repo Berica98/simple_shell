@@ -1,71 +1,45 @@
 #include "header.h"
 /**
- * main - main shell function
+ * main - main function
+ * @argc: argument count
+ * @argv: argument vector
+ *
  * Return: 0
  */
-int main(void)
+int main(int argc, char **argv)
 {
-	pid_t pid;
-	ssize_t read;
-	int status;
-	char *args[10];
-
 	char *format = NULL;
-	int i = 0;
-	bool end = false;
 	char *delim = " ";
-	char *token;
-	size_t size = 0;
 
-	while (1)
+	(void)argc;
+
+	while (true)
 	{
 		shell_print("#cisfun$ ");
-		read = getline(&format, &size, stdin);
-		if (read == -1)
+		format = get();
+		if (format == NULL)
 		{
-			perror("Error :");
-			exit(EXIT_FAILURE);
-		}
-		if (feof(stdin))
-		{
-			shell_print("\n");
-			break;
-		}
-		format[strcspn(format, "\n")] = '\0';
-
-		token = strtok(format, delim);
-		while (token)
-		{
-			args[i++] = token;
-			token = strtok(NULL, delim);
-			if (!token)
+			if (feof(stdin))
 			{
-				end = true;
+				shell_print("\n");
+				break;
+			}
+			else
+			{
+				perror("Error");
+				exit(EXIT_FAILURE);
 			}
 		}
-		if (!end)
+		argv = token(format, delim);
+		if (argv == NULL)/* indicates an error during tokenization */
 		{
+			free(format);
 			continue;
 		}
-		args[i] = NULL;
-		pid = fork();
+		exec(argv);
 
-		if (pid == 0)
-		{
-			execve(args[0], args, NULL);
-			perror("./shell");
-			exit(EXIT_FAILURE);
-		}
-		else if (pid > 0)
-		{
-			waitpid(pid, &status, 0);
-		}
-		else
-		{
-			perror("fork");
-			exit(EXIT_FAILURE);
-		}
 		free(format);
+		free(argv);
 	}
 	return (0);
 }
