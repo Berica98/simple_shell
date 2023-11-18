@@ -11,7 +11,6 @@ char *get(void)
 
 	char *format = NULL;
 	size_t n = 0;
-	int cal = 0;
 
 	/* getting user input */
 	read = getline(&format, &n, stdin);
@@ -23,7 +22,7 @@ char *get(void)
 		}
 	}
 	/* removing thr new line character*/
-	cal = strlen(format);
-	format[cal - 1] = '\0';
+	/*cal = strlen(format);*/
+	format[strlen(format) - 1] = '\0';
 	return (format);
 }

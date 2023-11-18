@@ -24,7 +24,7 @@ char **token(char *format, char *delim)
 			a += a;
 			argv = _realloc(argv, a, a * (sizeof(char *)));
 			if (!argv)
-				exit(127);
+				exit(1);
 		}
 		if (argv[b] == NULL)
 			break;
