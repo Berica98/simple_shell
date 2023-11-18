@@ -9,7 +9,7 @@
 int main(int argc, char **argv)
 {
 	char *format = NULL;
-	char *delim = " ";
+	char *delim = "\t \a\n ";
 
 	(void)argc;
 
